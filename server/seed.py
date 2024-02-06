@@ -15,7 +15,7 @@ with app.app_context():
 # seed data for teams
     teams = [
     {'name': "Mathare United", 'location': "Mathare"},
-    {'name': "Shabana FC", 'location': "Nairobi"},
+    {'name': "Shabana FC", 'location': "Muranga"},
     {'name': "Tusker United", 'location': "Thika"},
     {'name': "Gor Mahia United", 'location': "Kisumu"},
     {'name': "Sportpesa United", 'location': "Nairobi"},

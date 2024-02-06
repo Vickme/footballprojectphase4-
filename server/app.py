@@ -150,6 +150,7 @@ class Games(Resource):
         return response
     
 api.add_resource(Games, '/games')
+
 class GameByID(Resource):
     def get(self, id):
         game = Game.query.get(id)
