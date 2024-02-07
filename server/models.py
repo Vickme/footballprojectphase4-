@@ -59,6 +59,6 @@ class UpcomingGames(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     def serialize(self):
-        return {'id': self.id, 'home_team': self.home_team, 'away_team': self.away_team, 'game_time': self.game_time.strftime('%Y-%m-%d, %I:%M %p') if self.game_time else None,}
+        return {'id': self.id,'league_name':self.league_name, 'home_team': self.home_team, 'away_team': self.away_team, 'game_time': self.game_time.strftime('%Y-%m-%d, %I:%M %p') if self.game_time else None,}
 
     

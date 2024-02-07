@@ -202,7 +202,7 @@ api.add_resource(GameByID, '/games/<int:id>')
 
 class UpcomingGame(Resource):
     def get(self):
-        games = [game.serialize() for game in Game.query.all()]
+        games = [game.serialize() for game in UpcomingGames.query.all()]
         response = make_response(jsonify(games), 200)
         return response
     

@@ -3,7 +3,7 @@ from app import app
 from faker import Faker
 from random import choice as rc
 from datetime import datetime, time
-from models import db, Team,Coach,Game
+from models import db, Team,Coach,Game,UpcomingGames
 
 fake = Faker()
 
@@ -12,6 +12,7 @@ with app.app_context():
     Team.query.delete()
     Coach.query.delete()
     Game.query.delete()
+    UpcomingGames.query.delete()
 # seed data for teams
     teams = [
     {'name': "Mathare United", 'location': "Mathare"},
