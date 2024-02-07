@@ -1,8 +1,9 @@
 # app
 from flask import Flask,make_response,request
 from flask_migrate import Migrate
+from flask_cors import CORS
 from flask_restful import Api,Resource
-from models import db,Team,Game,Coach
+from models import db,Team,Game,Coach,UpcomingGames
 from flask import jsonify
 from datetime import datetime
 
@@ -10,8 +11,11 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI']  = 'sqlite:///football.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
 
+CORS(app) # to allow cross-origin requests
 migrate = Migrate(app,db)
+
 db.init_app(app)
 api = Api(app)
 
@@ -30,12 +34,16 @@ class Teams(Resource):
         # Convert the start_year string to a date object
         start_year = datetime.strptime(start_year_str, '%Y-%m-%d').date()
 
-        new_team = Team(name=name,location=location,start_year=start_year)
-        db.session.add(new_team)
-        db.session.commit()
+        get_name = Team.query.filter_by(name=name).first()
+        if get_name:
+            return {'error': 'team already exists'}, 400
+        else:
+            new_team = Team(name=name,location=location,start_year=start_year)
+            db.session.add(new_team)
+            db.session.commit()
 
-        response = make_response(jsonify(new_team.serialize()), 201)
-        return response
+            response = make_response(jsonify(new_team.serialize()), 201)
+            return response
 
 api.add_resource(Teams, '/teams')
 
@@ -191,6 +199,29 @@ class GameByID(Resource):
             return response
         
 api.add_resource(GameByID, '/games/<int:id>')
+
+class UpcomingGame(Resource):
+    def get(self):
+        games = [game.serialize() for game in Game.query.all()]
+        response = make_response(jsonify(games), 200)
+        return response
+    
+    def post(self):
+        data = request.get_json()
+        league = data['league']
+        home_team = data['home_team']
+        away_team = data['away_team']
+        game_time_str = data['game_time']
+        game_time = datetime.strptime(game_time_str, '%Y-%m-%dT%H:%M')
+
+        new_game = UpcomingGames(league_name = league, home_team = home_team, away_team = away_team, game_time=game_time)
+        db.session.add(new_game)
+        db.session.commit()
+
+        response = make_response(jsonify(new_game.serialize()), 201)
+        return response
+    
+api.add_resource(UpcomingGame, '/upcoming_games')
 
 
 

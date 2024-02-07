@@ -11,6 +11,7 @@ pytest = "*"
 faker = "*"
 sqlalchemy-serializer = "*"
 flask-restful = "*"
+flask-cors = "*"
 
 [dev-packages]
 
