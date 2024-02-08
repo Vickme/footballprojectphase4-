@@ -18,11 +18,11 @@ function Team() {
 
   return (
     <div className='container mx-auto'>
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 hover:bg-slate-100">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
       {getTeam.map(item => (
         <div key={item.id} className="bg-white shadow-md p-4 rounded-md">
           {/* image to use backgroundimage */}
-          <img src={backgroundImage} alt="Team" className="w-full h-64 object-cover mb-4 hover:" />
+          <img src={backgroundImage} alt="Team" className="w-full h-64 object-cover mb-4 hover:scale-110 " />
           <h1 className="text-xl font-bold mb-2 text-gray-700 ">
              Team Name: {item.team_name}
             </h1>
