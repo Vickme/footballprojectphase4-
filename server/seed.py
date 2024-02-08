@@ -53,6 +53,6 @@ with app.app_context():
             new_game.game_time = datetime.combine(datetime.today(), fake_time)
             db.session.add(new_game)
             db.session.commit()
-
+# print output
 print( "🦸‍♀️ Done seeding!")
  
