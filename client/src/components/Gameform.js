@@ -52,6 +52,17 @@ function NewGameForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+      // Validate game_time is not in the past
+  const selectedDateTime = new Date(game_time).getTime();
+  const currentDateTime = new Date().getTime();
+
+  if (selectedDateTime < currentDateTime) {
+    // Display an error message or prevent form submission
+    console.error('Selected date is in the past. Please choose a future date.');
+    alert('Please confirm date and choose a future date.');
+    return;
+  }
     axios.post('/upcoming_games', { home_team, away_team, league, game_time })
       .then(response => {
         console.log('Game created:', response.data);

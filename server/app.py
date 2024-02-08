@@ -166,9 +166,13 @@ class UpcomingGame(Resource):
         game_time_str = data['game_time']
         game_time = datetime.strptime(game_time_str, '%Y-%m-%dT%H:%M')
 
-        new_game = UpcomingGames(league_name = league, home_team = home_team, away_team = away_team, game_time=game_time)
-        db.session.add(new_game)
-        db.session.commit()
+        current_date = datetime.now()
+        if game_time < current_date:
+            return {'error': 'cannot create game in the past'}, 400 
+        else:
+            new_game = UpcomingGames(league_name = league, home_team = home_team, away_team = away_team, game_time=game_time)
+            db.session.add(new_game)
+            db.session.commit()
 
         response = make_response(jsonify(new_game.serialize()), 201)
         return response
@@ -183,3 +187,5 @@ api.add_resource(UpcomingGame, '/upcoming_games')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
+
+    # current_date = datetime.now().date()
