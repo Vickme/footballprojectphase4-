@@ -14,16 +14,16 @@ with app.app_context():
     # UpcomingGames.query.delete()
 # seed data for teams
     teams = [
-    {'name': "Mathare United", 'location': "Mathare", 'coach': "James Mwangi"},
-    {'name': "Shabana FC", 'location': "Muranga", 'coach':"Grace Njeri"},
-    {'name': "Tusker United", 'location': "Thika", 'coach':"John Kimani" },
-    {'name': "Gor Mahia United", 'location': "Kisumu",'coach':"Wanjiku Kamau" },
-    {'name': "Sportpesa United", 'location': "Nairobi", 'coach': "Mercy Kiptoo"},
-    {'name': "Bandari FC", 'location': "Bamburi", 'coach':"Peter Omondi"},
-    {'name': "Police FC", 'location': "Nyeri",'coach':"Faith Wambui"},
-    {'name': "Posta Rangers", 'location': "Mombasa",'coach':"Kevin Mutua"},
-    {'name': "City Stars", 'location': "Garissa",'coach':"Catherine Achieng"},
-    {'name': "Kakamega Homeboys", 'location': "Kakamega",'coach': "Samuel Ndegwa"}
+    {'team_name': "Mathare United", 'location': "Mathare", 'coach': "James Mwangi"},
+    {'team_name': "Shabana FC", 'location': "Muranga", 'coach':"Grace Njeri"},
+    {'team_name': "Tusker United", 'location': "Thika", 'coach':"John Kimani" },
+    {'team_name': "Gor Mahia United", 'location': "Kisumu",'coach':"Wanjiku Kamau" },
+    {'team_name': "Sportpesa United", 'location': "Nairobi", 'coach': "Mercy Kiptoo"},
+    {'team_name': "Bandari FC", 'location': "Bamburi", 'coach':"Peter Omondi"},
+    {'team_name': "Police FC", 'location': "Nyeri",'coach':"Faith Wambui"},
+    {'team_name': "Posta Rangers", 'location': "Mombasa",'coach':"Kevin Mutua"},
+    {'team_name': "City Stars", 'location': "Garissa",'coach':"Catherine Achieng"},
+    {'team_name': "Kakamega Homeboys", 'location': "Kakamega",'coach': "Samuel Ndegwa"}
     ]
     for team in teams:
             new_team = Team(**team)

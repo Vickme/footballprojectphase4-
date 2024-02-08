@@ -41,7 +41,7 @@ function NewGameForm() {
 
   const getAvailableAwayTeams = () => {
     // Filter out teams that are already selected as home_team
-    return teamOptions.filter(team => team.name !== home_team);
+    return teamOptions.filter(team => team.team_name !== home_team);
   };
 
   const handleHomeTeamChange = (selectedHomeTeam) => {
@@ -66,6 +66,7 @@ function NewGameForm() {
     axios.post('/upcoming_games', { home_team, away_team, league, game_time })
       .then(response => {
         console.log('Game created:', response.data);
+        alert('Match created successfully!');
         // Assuming you want to update the upcomingGames state after creating a new game
         setUpcomingGames(prevUpcomingGames => [...prevUpcomingGames, response.data]);
         // Optionally, you can reset the form fields
@@ -109,8 +110,8 @@ function NewGameForm() {
           >
             <option value="">Select Home Team</option>
             {teamOptions.map((team) => (
-              <option key={team.id} value={team.name}>
-                {team.name}
+              <option key={team.id} value={team.team_name}>
+                {team.team_name}
               </option>
             ))}
           </select>
@@ -126,8 +127,8 @@ function NewGameForm() {
           >
             <option value="">Select Away Team</option>
             {getAvailableAwayTeams().map((team) => (
-              <option key={team.id} value={team.name}>
-                {team.name}
+              <option key={team.id} value={team.team_name}>
+                {team.team_name}
               </option>
             ))}
           </select>
@@ -148,6 +149,7 @@ function NewGameForm() {
         </button>
       </form>
 
+      <div className='overflow-y-auto max-h-60'>
       <table className="w-full border-collapse border">
         <thead>
           <tr className="bg-gray-200">
@@ -159,7 +161,7 @@ function NewGameForm() {
         </thead>
         <tbody>
           {upcomingGames.map((game) => (
-            <tr key={game.id}>
+            <tr key={game.id} className='odd:bg-white even:bg-slate-50'>
               <td className="border p-2">{game.league_name}</td>
               <td className="border p-2">{game.home_team}</td>
               <td className="border p-2">{game.away_team}</td>
@@ -168,6 +170,7 @@ function NewGameForm() {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 }
