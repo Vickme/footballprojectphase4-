@@ -3,7 +3,7 @@ from flask import Flask,make_response,request
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_restful import Api,Resource
-from models import db,Team,Game,Coach,UpcomingGames
+from models import db,Team,Game,UpcomingGames
 from flask import jsonify
 from datetime import datetime
 
@@ -87,54 +87,6 @@ class TeamsByID(Resource):
         
 api.add_resource(TeamsByID, '/teams/<int:id>')
 
-class Coaches(Resource):
-    def get(self):
-        get_coach = [coach.serialize() for coach in Coach.query.all()]
-        response = make_response(jsonify(get_coach), 200)
-        return response
-    
-    def post(self):
-        data = request.get_json()
-        name = data['name']
-        
-        new_coach = Coach(name=name)
-        db.session.add(new_coach)
-        db.session.commit()
-        response = make_response(jsonify(new_coach.serialize()), 201)
-        return response
-    
-api.add_resource(Coaches, '/coach')
-class CoachByID(Resource):
-    def get(self, id):
-        coach = Coach.query.get(id)
-        if not coach:
-            return {'error':'coach does not exist'},404
-        else:
-            response = make_response(jsonify(coach.serialize()), 200)
-            return response
-    def delete(self, id):
-        coach = Coach.query.get(id)
-        if not coach:
-            return {'error':'coach does not exist'},404
-        else:
-            db.session.delete(coach)
-            db.session.commit()
-            response = make_response(jsonify({'message':'coach deleted'}), 200)
-            return response
-    def patch(self, id):
-        data = request.get_json()
-        name = data['name']
-
-        existing_coach = Coach.query.get(id)
-        if not existing_coach:
-            return {'error':'coach does not exist'},404
-        else:
-            existing_coach.name = name
-            db.session.commit()
-
-            response = make_response(jsonify(existing_coach.serialize()), 200)
-            return response
-api.add_resource(CoachByID, '/coach/<int:id>')
 
 class Games(Resource):
     def get(self):
