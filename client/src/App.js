@@ -1,19 +1,20 @@
-
+// inport css from input.css
+import './input.css';
 import React from 'react';
 import { Route,Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Teamform from './components/Teamform';
-import Coachform from './components/Coachform';
+import Team from './components/Team';
 import Gameform from './components/Gameform'; 
+import Home from './pages/Home';
 
 
 function App() {
   return (
     <>
-    <Navbar/>
     <Routes>
+          <Route path="/" element={<Home/>} />
           <Route path="/new-team" element={<Teamform/>} />
-          <Route path="/new-coach" element={<Coachform/>} /> 
+          <Route path="/teams" element={<Team/>} /> 
           <Route path="/new-game" element =  {<Gameform/>} /> 
     </Routes>
     </>

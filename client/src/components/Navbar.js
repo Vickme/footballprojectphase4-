@@ -7,7 +7,7 @@ function Navbar() {
     <nav>
       <ul>
         <li><Link to="/new-team">New Team</Link></li>
-        <li><Link to="/new-coach">New Coach</Link></li>
+        <li><Link to="/team">Team</Link></li>
         <li><Link to="/new-game">New Game</Link></li>
       </ul>
     </nav>
@@ -15,4 +15,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
