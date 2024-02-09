@@ -17,7 +17,7 @@ function Team() {
   }, []);
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto ' >
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
       {getTeam.map(item => (
         <div key={item.id} className="bg-white shadow-md p-4 rounded-md">
@@ -27,7 +27,7 @@ function Team() {
           <h1 className="text-xl font-bold mb-2 text-gray-700 ">
              Team Name: {item.team_name}
             </h1>
-            
+
            <p className="text-gray-600 mb-2">
             Location: {item.location}
             </p>
