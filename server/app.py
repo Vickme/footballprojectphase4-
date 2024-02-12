@@ -27,18 +27,19 @@ class Teams(Resource):
     
     def post(self):
         data = request.get_json()
-        name = data['name']
+        team_name = data['team_name']
         location = data['location']
         start_year_str = data['start_year']
+        coach = data['coach']
 
         # Convert the start_year string to a date object
         start_year = datetime.strptime(start_year_str, '%Y-%m-%d').date()
 
-        get_name = Team.query.filter_by(name=name).first()
+        get_name = Team.query.filter_by(team_name=team_name).first()
         if get_name:
-            return {'error': 'team already exists'}, 400
+            return {'error': 'team already exists'}, 404
         else:
-            new_team = Team(name=name,location=location,start_year=start_year)
+            new_team = Team(team_name=team_name,location=location,start_year=start_year, coach = coach)
             db.session.add(new_team)
             db.session.commit()
 

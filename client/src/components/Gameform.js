@@ -41,7 +41,7 @@ function NewGameForm() {
 
   const getAvailableAwayTeams = () => {
     // Filter out teams that are already selected as home_team
-    return teamOptions.filter(team => team.name !== home_team);
+    return teamOptions.filter(team => team.team_name !== home_team);
   };
 
   const handleHomeTeamChange = (selectedHomeTeam) => {
@@ -66,6 +66,7 @@ function NewGameForm() {
     axios.post('/upcoming_games', { home_team, away_team, league, game_time })
       .then(response => {
         console.log('Game created:', response.data);
+        alert('Match created successfully!');
         // Assuming you want to update the upcomingGames state after creating a new game
         setUpcomingGames(prevUpcomingGames => [...prevUpcomingGames, response.data]);
         // Optionally, you can reset the form fields
@@ -80,66 +81,97 @@ function NewGameForm() {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-      <div>
-        <label>League:</label>
-        <select value={league} onChange={(e) => setLeague(e.target.value)} required >
-          <option value="">Select League</option>
-          {gameOptions.map(game => (
-            <option key={game.id} value={game.name}>{game.name}</option>
-          ))}
-        </select>
-      </div>
-        <div>
-          <label>Home Team:</label>
-          <select value={home_team} onChange={(e) => handleHomeTeamChange(e.target.value)} required>
+    <div className='container mx-auto'>
+      <form onSubmit={handleSubmit} className="mb-8">
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">League:</label>
+          <select
+            value={league}
+            onChange={(e) => setLeague(e.target.value)}
+            required
+            className="mt-1 p-2 border rounded-md w-full"
+          >
+            <option value="">Select League</option>
+            {gameOptions.map((game) => (
+              <option key={game.id} value={game.name}>
+                {game.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Home Team:</label>
+          <select
+            value={home_team}
+            onChange={(e) => handleHomeTeamChange(e.target.value)}
+            required
+            className="mt-1 p-2 border rounded-md w-full"
+          >
             <option value="">Select Home Team</option>
-            {teamOptions.map(team => (
-              <option key={team.id} value={team.name}>{team.name}</option>
+            {teamOptions.map((team) => (
+              <option key={team.id} value={team.team_name}>
+                {team.team_name}
+              </option>
             ))}
           </select>
         </div>
 
-        <div>
-          <label>Away Team:</label>
-          <select value={away_team} onChange={(e) => setAwayTeam(e.target.value)} required>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Away Team:</label>
+          <select
+            value={away_team}
+            onChange={(e) => setAwayTeam(e.target.value)}
+            required
+            className="mt-1 p-2 border rounded-md w-full"
+          >
             <option value="">Select Away Team</option>
-            {getAvailableAwayTeams().map(team => (
-              <option key={team.id} value={team.name}>{team.name}</option>
+            {getAvailableAwayTeams().map((team) => (
+              <option key={team.id} value={team.team_name}>
+                {team.team_name}
+              </option>
             ))}
           </select>
         </div>
 
-        <div>
-          <label>Game Time:</label>
-          <input type="datetime-local" value={game_time} onChange={(e) => setGameTime(e.target.value)} />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Game Time:</label>
+          <input
+            type="datetime-local"
+            value={game_time}
+            onChange={(e) => setGameTime(e.target.value)}
+            className="mt-1 p-2 border rounded-md w-full"
+          />
         </div>
 
-        <button type="submit">Create Game</button>
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
+          Create Game
+        </button>
       </form>
 
-      <table>
+      <div className='overflow-y-auto max-h-60'>
+      <table className="w-full border-collapse border">
         <thead>
-          <tr>
-            <th>League</th>
-            <th>Home Team</th>
-            <th>Away Team</th>
-            <th>Game Time</th>
+          <tr className="bg-gray-200">
+            <th className="border p-2">League</th>
+            <th className="border p-2">Home Team</th>
+            <th className="border p-2">Away Team</th>
+            <th className="border p-2">Game Time</th>
           </tr>
         </thead>
         <tbody>
-          {upcomingGames.map(game => (
-            <tr key={game.id}>
-              <td>{game.league_name}</td>
-              <td>{game.home_team}</td>
-              <td>{game.away_team}</td>
-              <td>{game.game_time}</td>
+          {upcomingGames.map((game) => (
+            <tr key={game.id} className='odd:bg-white even:bg-slate-50'>
+              <td className="border p-2">{game.league_name}</td>
+              <td className="border p-2">{game.home_team}</td>
+              <td className="border p-2">{game.away_team}</td>
+              <td className="border p-2">{game.game_time}</td>
             </tr>
           ))}
         </tbody>
       </table>
-    </>
+    </div>
+    </div>
   );
 }
 

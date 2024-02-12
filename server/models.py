@@ -9,7 +9,7 @@ db = SQLAlchemy()
 class Team(db.Model,SerializerMixin):
     __tablename__ = 'teams'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    team_name = db.Column(db.String)
     location = db.Column(db.String)
     start_year = db.Column(db.Date)
     coach = db.Column(db.String)
@@ -19,7 +19,7 @@ class Team(db.Model,SerializerMixin):
     games = db.relationship('Game', backref='team')
 
     def serialize(self):
-         return{'id': self.id,'name': self.name, 'location': self.location,'coach':self.coach,  'start_year': self.start_year}
+         return{'id': self.id,'team_name': self.team_name, 'location': self.location,'coach':self.coach,  'start_year': self.start_year}
 
 class Game(db.Model, SerializerMixin):
     __tablename__ = 'games'
