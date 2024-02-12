@@ -14,7 +14,7 @@ function Navbar() {
         <li className='ml-4'><Link to="/teams">Teams</Link></li>
         <li><Link to="/new-team">Dream Team</Link></li>
         <li className='ml-4'><Link to="/new-game">Create Match</Link></li>
-        <li><Link to="">LogOut</Link></li>
+        <li><Link to="/">LogOut</Link></li>
       </ul>
     </nav>
   </div>

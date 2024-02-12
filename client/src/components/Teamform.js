@@ -31,7 +31,7 @@ import axios from 'axios';
   
     return (
       <div className='bg-gradient-to-r from-black to-white'>
-      <div className='container mx-auto flex items-center  justify-left h-screen'>
+      <div className='container mx-auto flex items-center  justify-center h-screen'>
         <form onSubmit={handleSubmit } className='bg-slate-200 shadow-md rounded px-8 pt-4' >
         
         {submit === 'success' && (
