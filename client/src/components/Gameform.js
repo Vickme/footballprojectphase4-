@@ -81,7 +81,7 @@ function NewGameForm() {
   };
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto mb-4'>
       <form onSubmit={handleSubmit} className="mb-8">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">League:</label>
@@ -152,7 +152,7 @@ function NewGameForm() {
       <div className='overflow-y-auto max-h-60'>
       <table className="w-full border-collapse border">
         <thead>
-          <tr className="bg-gray-200">
+          <tr className="bg-gray-200 text-left">
             <th className="border p-2">League</th>
             <th className="border p-2">Home Team</th>
             <th className="border p-2">Away Team</th>

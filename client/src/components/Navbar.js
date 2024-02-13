@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Navbar() {
   return (
     <div>
-    <nav className='bg-gradient-to-r from-white to-gray-600 mt-2'>
+    <nav className='bg-cyan-700 mt-2'>
       <ul className='flex flex-row w-full p-4 text bg-white text-transform: uppercase rounded-lg shadow-lg backdrop-blur-sm backdrop-filter bg-opacity-30 
       border-2 border-gray-600/50 border-opacity-30
       h-16 items-center justify-between'>
